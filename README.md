@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+ # NorthWind Mağazası React Projesi
+Bu proje, ürün listesini farklı kategorilerde görüntüleyen bir React uygulamasıdır. Kullanıcılar, ürün detaylarını görüntüleyebilir, ürünleri sepete ekleyebilir ve sepetteki ürünleri yönetebilir. Tasarım, basit bir e-ticaret arayüzünden esinlenmiştir ve kolay gezinme ile sezgisel kullanıcı arayüzü öğeleri sunar.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+![Ürün Listesi Görünümü](images\1.png)
 
-In the project directory, you can run:
+![Ürün Listesi Görünümü](images\3.png)
 
-### `npm start`
+![Sepet Önizlemesi](images\4.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Sepet Sayfası](images\5.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Özellikler
+### Kategori Gezinme:
+ Yan panelde kategorileri seçerek ürünleri filtreleme.
 
-### `npm test`
+### Ürün Detayları:
+ Fiyat, miktar ve stok durumu gibi ürün bilgilerini görüntüleme.
+Sepet Yönetimi: Ürünleri sepete ekleme, sepetteki ürünleri görüntüleme, miktar ayarlama ve ürünleri kaldırma.
+## Kullanılan Teknolojiler
+### React: 
+Kullanıcı arayüzünü oluşturmak için.
+### React Hooks:
+ Durum yönetimi ve yaşam döngüsü işlemleri için.
+### CSS:
+ Kullanıcı arayüzü stillendirmesi için.
+Başlarken
+Bu projeyi yerel ortamda kurmak için aşağıdaki adımları izleyin.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Gereksinimler
+Node.js: Node.js’in kurulu olduğundan emin olun. nodejs.org adresinden indirebilirsiniz.
+## Kurulum
+Bu depoyu klonlayın:
 
-### `npm run build`
+bash
+Kodu kopyala
+git clone https://github.com/FATMATURKYILMAZ/northwind-Redux.git
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+cd northwind-store-react
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Gerekli bağımlılıkları yükleyin:
+## api alt yapısının hazırlanması
+api json dosyası üzerinden verilerimizi kullanırız
+api ye bağlanınca bizim http://localhost:3001'inci portuna atar tarayıcı bizi.
+bash
+Kodu kopyala
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
 
-### `npm run eject`
+Geliştirme sunucusunu başlatın:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+bash
+Kodu kopyala
+npm start
+Tarayıcıda http://localhost:3000 adresini açarak uygulamayı görüntüleyin.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Kod Yapısı
+Bileşen Yapısı
+### App.js: 
+Uygulamanın ana bileşeni, yönlendirme ve yerleşim düzenini yönetir.
+### CategoryList.js: 
+Kategori listesini render eder ve kategori seçimini yönetir.
+### ProductList.js: 
+Seçilen kategorideki ürünleri görüntüler ve ürünleri sepete eklemeyi sağlar.
+Cart.js: Sepete eklenen ürünlerin listesini gösterir ve miktar ayarlamalarını sağlar.
+## Kod Örnekleri
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Sepete Ürün Ekleme
+javascript
+Kodu 
+const handleAddToCart = (product) => {
+    setCart((prevCart) => {
+        const itemExists = prevCart.find(item => item.id === product.id);
+        if (itemExists) {
+            return prevCart.map(item =>
+                item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            );
+        }
+        return [...prevCart, { ...product, quantity: 1 }];
+    });
+};
+Sepetten Ürün Kaldırma
+javascript
+Kodu kopyala
+const handleRemoveFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter(item => item.id !== productId));
+};
+Katkıda Bulunma
+Bu projeye katkıda bulunmak isterseniz, depoyu fork'layıp değişikliklerinizi içeren bir pull request oluşturabilirsiniz.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Lisans
+Bu proje MIT Lisansı ile lisanslanmıştır.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
 ### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
